@@ -14,9 +14,16 @@ public class GatewayConf {
                   .route("client", r -> r
                        .path("/client")
                        .uri("http://localhost:8082/"))
-                  .route("client", r -> r
+                  .route("staff", r -> r
                        .path("/staff")
                        .uri("http://localhost:8083/"))
+                  .route("cep", r -> r
+                          .path("/cep/**")
+                          .filters(f -> f.rewritePath("/cep/(?<cep>.*)","/api/cep/v1/${cep}"))
+                          .uri("https://brasilapi.com.br"))
                        .build();
+
+
+
      }
 }
